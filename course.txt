@@ -1,0 +1,7 @@
+{
+  "title": "Untitled",
+  "emailFile": "emails.txt",
+  "rootOwner": "phil-rice",
+  "rootRepo": "javaoptics",
+  "organisation": "https://github.com/training-demo-for-phil"
+}

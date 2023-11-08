@@ -1,0 +1,30 @@
+{
+  "template":    "typescript",
+  "name":        "@runbook/trainingcourse",
+  "description": "A cli for manipulating git repositories to help in training",
+  "packageJson": {
+    "bin":             {
+      "training": "dist/index.js"
+    },
+    "dependencies":    {
+      "@runbook/utils":       "^0.3.0",
+      "@laoban/fileops":       "^1.4.0",
+      "@laoban/filesops-node": "^1.4.0"
+    },
+    "devDependencies": {
+    },
+    "keywords":        [
+      "github",
+      "git",
+      "training",
+      "devops"
+    ]
+  },
+  "links":       [
+  ],
+  "guards":      {
+    "publish": true,
+    "test":    true,
+    "compile": true
+  }
+}
