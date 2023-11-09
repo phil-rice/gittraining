@@ -3,5 +3,6 @@
   "emailFile": "emails.txt",
   "rootOwner": "phil-rice",
   "rootRepo": "javaoptics",
-  "organisation": "https://github.com/training-demo-for-phil"
+  "token": "${env.GITHUB_TOKEN}",
+  "organisation": "training-demo-for-phil"
 }

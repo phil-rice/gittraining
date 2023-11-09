@@ -1,9 +1,12 @@
 import { FileOps, parseJson } from "@laoban/fileops";
 import { composeNameAndValidators, validateChildString } from "@runbook/utils";
+import { derefence } from "@laoban/variables";
+import { dollarsBracesVarDefn } from "@laoban/variables/dist/src/variables";
 
 export interface RawSharedCourseDetails {
   title?: string
   organisation?: string
+  token?: string
   rootOwner?: string
   rootRepo?: string
 }
@@ -15,8 +18,8 @@ interface EmailData {
 }
 function getClean ( email: string ) {
   return email
-    .replace ( /@/g, '_at' )
-    .replace ( /[^a-zA-Z0-9-_@]/g, '' )
+    .replace ( /@/g, '_at_' )
+    .replace ( /[^a-zA-Z0-9-_@.]/g, '' )
     .toLowerCase ();
 }
 export const toEmailData = ( organisation: string ) => ( email: string ): EmailData => {
@@ -54,10 +57,11 @@ Cause: ${e.message}` )
 
 export function validateRawCourse ( course: RawCourse ): string[] {
   const v = composeNameAndValidators<RawCourse> (
-    validateChildString ( 'title' ),
     validateChildString ( 'emailFile' ),
     validateChildString ( 'rootOwner' ),
     validateChildString ( 'rootRepo' ),
+    validateChildString ( 'title' ),
+    validateChildString ( 'token' ),
     validateChildString ( 'organisation' ),
   )
   return v ( '' ) ( course )
@@ -66,7 +70,8 @@ export function validateRawCourse ( course: RawCourse ): string[] {
 
 export async function loadAndConvertCourse ( fileOps: FileOps, courseFileName: string ): Promise<Course> {
   let rawFileDetails = await loadFile ( fileOps, 'course', courseFileName );
-  const rawCourse = parseJson<RawCourse> ( () => courseFileName ) ( rawFileDetails )
+  const fileDetails = derefence ( courseFileName, { env: process.env }, rawFileDetails, { variableDefn: dollarsBracesVarDefn,throwError:true } )
+  const rawCourse = parseJson<RawCourse> ( () => courseFileName ) ( fileDetails )
   let errors = validateRawCourse ( rawCourse );
   if ( errors.length > 0 ) throw new Error ( `Course file ${courseFileName} is invalid:\n${errors.join ( "\n" )}` )
   return convertCourse ( fileOps, rawCourse );

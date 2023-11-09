@@ -7,9 +7,10 @@
       "training": "dist/index.js"
     },
     "dependencies":    {
-      "@runbook/utils":       "^0.3.0",
+      "@runbook/utils":        "^0.3.0",
       "@laoban/fileops":       "^1.4.0",
-      "@laoban/filesops-node": "^1.4.0"
+      "@laoban/filesops-node": "^1.4.0",
+      "@laoban/variables":     "^1.4.0"
     },
     "devDependencies": {
     },

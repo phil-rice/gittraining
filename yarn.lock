@@ -634,6 +634,13 @@
   resolved "https://registry.yarnpkg.com/@laoban/validation/-/validation-1.4.31.tgz#75cf4f041d9b604a55d7a0ac5e72450508079477"
   integrity sha512-WlT+b+PAqEF3AfW2AeZqfC2DT6j4OLQBL1gGTkkw6oYwMWt6D80lc8l1O2b3L9tpnMIhDweKE6RbbnykavpmWg==
 
+"@laoban/variables@^1.4.0":
+  version "1.4.31"
+  resolved "https://registry.yarnpkg.com/@laoban/variables/-/variables-1.4.31.tgz#1aa9b65d30eaa21b9ea962472939ec95c492c91b"
+  integrity sha512-/dOtOjCvWRLJBozpPcOB0MJHh30e4J6EdfutLwxipf2kpowhVKZA0BJEf41B/dxRxTf36+RxnMVcGTbBbvzl6w==
+  dependencies:
+    "@laoban/utils" "1.4.31"
+
 "@laoban/xml@1.4.31":
   version "1.4.31"
   resolved "https://registry.yarnpkg.com/@laoban/xml/-/xml-1.4.31.tgz#97c0bb9882037221871385b026f0f10c36bbf78d"

@@ -1,0 +1,19 @@
+# Why a course.json file
+This is the config for the course. We can have multiple courses with the same codebase, but different course.txt files
+The capability is not implemented yet, but is easy
+
+# Why have a separate emails.txt file
+I am not sure I am correct here... but it is easier to use.
+The emails file isn't json. Its just a list of emails. That's much easier to edit and manage.
+We can also (not implemented yet) override 'just the emails' file and have multiple lists
+
+# Why not using git forks
+I started with git forks, but found it hard to have a second git fork in the same organisation
+
+#Why not using git branches
+Because it gets hard to navigate, hard to work out what the status is and so on. It's good to give each student their own place.
+
+# Why is the current repo the current master
+The alternative is to have the remote github repo the current master. That is easier when
+everything is working, but harder when debugging and making changes
+I decided it was easier to have the current repo the current master, and then push to the remote repo when everything is working
