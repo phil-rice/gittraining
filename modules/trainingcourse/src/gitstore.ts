@@ -8,7 +8,16 @@ export interface Gitstore {
 
 
 export type FetchFn = ( url: RequestInfo, info?: RequestInit, ) => Promise<Response>
-export type ExecuteFn = ( command: string, args: string[] ) => Promise<ExecuteResult>
+export type ExecuteFn = ( command: string ) => Promise<ExecuteResult>
+
+export const executeOrError = ( execute: ExecuteFn ) => async ( command: string ): Promise<string> => {
+  const { stdout, stderr, code } = await execute ( command );
+  if ( code === 0 ) {
+    return stdout.trim();
+  } else {
+    throw new Error ( stderr );
+  }
+};
 
 interface ExecuteResult {
   stdout: string
@@ -93,7 +102,7 @@ const statusForGithub = ( fetch: FetchFn ) => async ( organisation: string, repo
 
 export const currentBranch = ( execute: ExecuteFn ) => {
   return () => {
-    return execute ( 'git', [ 'branch', '--show-current' ] ).then ( ( { stdout, stderr, code } ) => {
+    return execute ( 'git branch --show-current'  ).then ( ( { stdout, stderr, code } ) => {
       if ( code !== 0 ) throw new Error ( `git branch --show-current failed with code ${code} and stderr ${stderr}` )
       if ( stdout.trim ().length === 0 ) throw new Error ( `git branch --show-current failed with code ${code} and stderr ${stderr}` )
       return stdout.trim ()
@@ -102,7 +111,7 @@ export const currentBranch = ( execute: ExecuteFn ) => {
 }
 export const currentRepo = ( execute: ExecuteFn ) => {
   return () => {
-    return execute ( 'git', [ 'config', '--get', 'remote.origin.url' ] ).then ( ( { stdout, stderr, code } ) => {
+    return execute ( 'git config --get remote.origin.url'  ).then ( ( { stdout, stderr, code } ) => {
       if ( code !== 0 ) throw new Error ( `git config --get remote.origin.url failed with code ${code} and stderr ${stderr}` )
       if ( stdout.trim ().length === 0 ) throw new Error ( `git config --get remote.origin.url failed with code ${code} and stderr ${stderr}` )
       return stdout.trim ()

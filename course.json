@@ -1,6 +1,6 @@
 {
   "title": "Untitled",
-  "emailFile": "emails.txt",
+  "emailFile": "emails.csv",
   "rootOwner": "phil-rice",
   "rootRepo": "javaoptics",
   "token": "${env.GITHUB_TOKEN}",
